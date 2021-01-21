@@ -6,9 +6,10 @@
   align-items: center;
   width: 100%;
   background-color: $color-white;
-  padding: 1rem;
+  padding: 2.25rem 1.5rem;
   border-radius: 15px;
   margin-bottom: 1rem;
+  border: 1px solid #ebebeb;
 
   &__input {
     font-family: inherit;
@@ -17,12 +18,22 @@
     font-weight: 300;
     outline: none;
     width: 100%;
+    font-size: 1.4rem;
+    &::placeholder {
+      color: #d1d1d1;
+    }
   }
 
   &__icon {
     height: 1.5rem;
     width: 1.5rem;
     fill: $color-primary;
-    margin-right: 1rem;
+    margin-right: 2rem;
+  }
+
+  &__number {
+    display: flex;
+    flex-wrap: nowrap;
+    color: #d1d1d1;
   }
 }

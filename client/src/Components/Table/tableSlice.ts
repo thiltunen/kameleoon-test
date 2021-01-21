@@ -9,12 +9,19 @@ interface ABtest {
   siteId: number;
 }
 
+interface Sites {
+  id: number;
+  url: string;
+}
+
 interface TableState {
   ABtests: ABtest[];
+  sites: Sites[];
 }
 
 const initialState: TableState = {
   ABtests: [],
+  sites: [],
 };
 
 export const tableSlice = createSlice({
@@ -28,16 +35,17 @@ export const tableSlice = createSlice({
     getABtests: (state, action: PayloadAction<ABtest[]>) => {
       state.ABtests = action.payload;
     },
+
+    getSites: (state, action: PayloadAction<Sites[]>) => {
+      state.sites = action.payload;
+    },
   },
 });
 
 export const getABtestsThunk = (): AppThunk => async (dispatch) => {
-  console.log('111');
   try {
     const response = await fetch('http://localhost:3100/tests');
     const result: ABtest[] = await response.json();
-
-    console.log(result);
 
     dispatch(getABtests(result));
   } catch (error) {
@@ -45,11 +53,22 @@ export const getABtestsThunk = (): AppThunk => async (dispatch) => {
   }
 };
 
-export const { getABtests } = tableSlice.actions;
+export const getSitesThunk = (): AppThunk => async (dispatch) => {
+  try {
+    const response = await fetch('http://localhost:3100/sites');
+    const result: Sites[] = await response.json();
+    dispatch(getSites(result));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const { getABtests, getSites } = tableSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectABtests = (state: RootState) => state.table.ABtests;
+export const selectSites = (state: RootState) => state.table.sites;
 
 export default tableSlice.reducer;

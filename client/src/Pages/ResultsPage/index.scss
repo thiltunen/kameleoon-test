@@ -1,0 +1,17 @@
+.back-button {
+  margin-top: 61.6rem;
+  font-weight: 600;
+
+  &__link:link,
+  &__link:active,
+  &__link:visited {
+    color: black;
+    text-decoration: none;
+  }
+
+  &__link:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
